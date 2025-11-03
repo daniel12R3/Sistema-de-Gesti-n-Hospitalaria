@@ -27,7 +27,7 @@ Proyecto/
 │
 ├── Entregable 1.pdf # Documento que resume el laboratorio
 │
-└── README.md # Este archivo
+└── README.md # Este archivo.
 
 ## Requisitos
 
