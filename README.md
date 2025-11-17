@@ -72,75 +72,54 @@ Este proyecto implementa un sistema que:
 🏗️ Arquitectura del Sistema (MVC Simplificado)
 1. Modelo (model/)
 
-Representa las entidades principales: Paciente, Medico, Especialidad, Cita, PagoPaciente, PagoMedico.
-
-Cada clase contiene sus atributos y métodos getters/setters.
+- Representa las entidades principales: Paciente, Medico, Especialidad, Cita, PagoPaciente, PagoMedico.
+- Cada clase contiene sus atributos y métodos getters/setters.
 
 2. DAO (dao/)
 
-Acceso a la base de datos Oracle.
-
-Funcionalidades:
-
-Insertar registros (insertar)
-
-Buscar por ID (buscarPorId)
-
-Listar registros (listar)
-
-Eliminar registros (eliminar)
-
-Uso de PreparedStatement para seguridad y manejo de tipos DATE/TIMESTAMP.
+- Acceso a la base de datos Oracle.
+- Funcionalidades:
+     - Insertar registros (insertar)
+     - Buscar por ID (buscarPorId)
+     - Listar registros (listar)
+     - Eliminar registros (eliminar)
+- Uso de PreparedStatement para seguridad y manejo de tipos DATE/TIMESTAMP.
 
 3. Service (service/)
 
-Implementa validaciones y reglas de negocio:
-
-Campos obligatorios
-
-Verificación de existencia de pacientes y médicos
-
-Control de solapamiento de horarios de citas
-
-Manejo de pagos y acumulados por médico o paciente
+- Implementa validaciones y reglas de negocio:
+    - Campos obligatorios
+    - Verificación de existencia de pacientes y médicos
+    - Control de solapamiento de horarios de citas
+    - Manejo de pagos y acumulados por médico o paciente
 
 4. Main (app/)
 
-Interfaz de usuario mediante consola.
-
-Menús para:
-
-Registrar, listar, actualizar y eliminar médicos y pacientes
-
-Gestionar citas y pagos
-
-Consultas detalladas (ej.: total ganado por médico, historial de pagos)
+- Interfaz de usuario mediante consola.
+- Menús para:
+     - Registrar, listar, actualizar y eliminar médicos y pacientes
+     - Gestionar citas y pagos
+     - Consultas detalladas (ej.: total ganado por médico, historial de pagos)
 
 📝 Funcionalidades Principales
 
-👤 Gestión de Pacientes
-
-🩺 Gestión de Médicos
-
-🏷️ Gestión de Especialidades
-
-📅 Gestión de Citas
-
-💰 Registro de Pagos de Pacientes y Médicos
-
-📊 Consultas y reportes básicos
+   - 👤 Gestión de Pacientes
+   - 🩺 Gestión de Médicos
+   - 🏷️ Gestión de Especialidades
+   - 📅 Gestión de Citas
+   - 💰 Registro de Pagos de Pacientes y Médicos
+   - 📊 Consultas y reportes básicos
 
 📚 Base de Datos
 
-Script SQL: SQLtablas/CreacionDeTablas.sql
-
-Diagrama DER: diagrama-DER/DER.pdf
+   - Script SQL: SQLtablas/CreacionDeTablas.sql
+   - Diagrama DER: diagrama-DER/DER.pdf
 
 El diagrama DER muestra cómo las entidades se relacionan en la base de datos y facilita la comprensión del diseño.
 
 📄 Entregables
 
-Entregable 2.pdf → Documento del proyecto con explicación de la estructura, capturas, pruebas y resultados.
+   - Entregable 2.pdf → Documento del proyecto con explicación de la estructura, capturas, pruebas y resultados.
 
 
 Estudiantes:
