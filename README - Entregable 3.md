@@ -202,9 +202,10 @@ LEFT JOIN CITA c ON p.idpaciente = c.idpaciente
 LEFT JOIN PAGOPACIENTE pp ON c.idcita = pp.idcita
 GROUP BY p.idpaciente, p.nombre, p.apellido;
 ```
+## 5. Funcionalidades Avanzadas en la Aplicación (Java)
 
-5. Funcionalidades Avanzadas en la Aplicación (Java)
-5.1 Invocación de Procedimientos
+### 5.1 Invocación de Procedimientos
+```java
 CallableStatement cstmt = conn.prepareCall("{call sp_insertar_cita(?, ?, ?, ?, ?, ?)}");
 cstmt.setDate(1, java.sql.Date.valueOf(fecha));
 cstmt.setString(2, horaInicio);
@@ -213,29 +214,30 @@ cstmt.setString(4, estado);
 cstmt.setInt(5, idPaciente);
 cstmt.setInt(6, idMedico);
 cstmt.execute();
-
-5.2 Mostrar resultados de Vistas
+```
+### 5.2 Mostrar resultados de Vistas
+```java
 Statement stmt = conn.createStatement();
 ResultSet rs = stmt.executeQuery("SELECT * FROM vw_citas_detalle");
 while(rs.next()){
     System.out.println(rs.getInt("idcita") + " - " + rs.getString("paciente") + " - " + rs.getString("medico"));
 }
-
-5.3 Validaciones en el Servicio
+```
+### 5.3 Validaciones en el Servicio
 
   - Evitar duplicidad de DNI o CMP
   - Validar pagos mayores a 0
   - Controlar pagos duplicados por cita y fecha
   - Validar fecha y hora de citas
 
-6. Documentación y GitHub
+### 6. Documentación y GitHub
 
 Scripts SQL, proyecto Java y documentación con ejemplos:
 https://github.com/daniel12R3/Sistema-de-Gesti-n-Hospitalaria.git
 
 Incluye ejemplos de ejecución, capturas de resultados y pruebas de funcionalidad.
 
-7. Conclusiones
+### 7. Conclusiones
   - Automatización completa de la gestión hospitalaria mediante procedimientos, triggers y vistas.
   - Integración con Java para invocación de procedimientos y visualización de vistas.
   - Garantía de integridad de datos mediante validaciones y restricciones.
