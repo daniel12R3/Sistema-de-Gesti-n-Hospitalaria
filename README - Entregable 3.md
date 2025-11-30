@@ -1,39 +1,40 @@
-🏥 Sistema de Gestión Hospitalaria – Entregable Final (Entregable 3) 💻
+# 🏥 Sistema de Gestión Hospitalaria – Entregable Final (Entregable 3) 💻
 
-⚠️ Este README corresponde al Entregable 3 – Versión Final del Sistema de Gestión Hospitalaria.
-Contiene todas las funcionalidades, procedimientos, triggers, vistas y ejemplos de ejecución.
-Se recomienda usar este README como guía principal para ejecutar y probar el proyecto.
+> ⚠️ Este README corresponde al **Entregable 3 – Versión Final** del Sistema de Gestión Hospitalaria.  
+> Contiene todas las funcionalidades, procedimientos, triggers, vistas y ejemplos de ejecución.  
+> Se recomienda usar este README como guía principal para ejecutar y probar el proyecto.
 
-Integrantes:
+**Integrantes:**  
+- MillonesVasquez, Daniel  
+- Coronado Quispe, Piero  
 
-MillonesVasquez, Daniel
+**Fecha de entrega:** Sábado – Semana 15  
+**Repositorio GitHub:** [https://github.com/daniel12R3/Sistema-de-Gesti-n-Hospitalaria.git](https://github.com/daniel12R3/Sistema-de-Gesti-n-Hospitalaria.git)  
 
-Coronado Quispe, Piero
+---
 
-Fecha de entrega: Sábado – Semana 15
-Repositorio GitHub: https://github.com/daniel12R3/Sistema-de-Gesti-n-Hospitalaria.git
+## 🎯 Objetivo del Proyecto
 
-🎯 Objetivo del Proyecto
+Desarrollar un **Sistema de Gestión Hospitalaria** que permita administrar de manera eficiente la información clínica de pacientes, médicos, áreas, citas y pagos, automatizando los procesos administrativos de una clínica y facilitando la visualización y control de información mediante **Java y Oracle Database**.
 
-Desarrollar un Sistema de Gestión Hospitalaria que permita administrar de manera eficiente la información clínica de pacientes, médicos, áreas, citas y pagos, automatizando los procesos administrativos de una clínica y facilitando la visualización y control de información mediante Java y Oracle Database.
+---
 
-📄 Descripción
+## 📄 Descripción
 
 El sistema permite:
 
-Gestionar pacientes, médicos, especialidades, citas y pagos.
+- Gestionar pacientes, médicos, especialidades, citas y pagos.  
+- Conectar Java con Oracle 11g XE mediante JDBC.  
+- Ejecutar consultas y recorrer registros de manera eficiente.  
+- Implementar validaciones y control de integridad mediante triggers y restricciones.  
+- Automatizar procesos y reglas de negocio mediante procedimientos almacenados.  
+- Visualizar información de manera rápida mediante vistas.  
 
-Conectar Java con Oracle 11g XE mediante JDBC.
+---
 
-Ejecutar consultas y recorrer registros de manera eficiente.
+## 📂 Estructura del Repositorio
 
-Implementar validaciones y control de integridad mediante triggers y restricciones.
 
-Automatizar procesos y reglas de negocio mediante procedimientos almacenados.
-
-Visualizar información de manera rápida mediante vistas.
-
-📂 Estructura del Repositorio
 ├─ SQLtablas/                       # Scripts de creación de la base de datos Oracle
 │  └─ CreacionDeTablas.sql
 ├─ diagrama-DER/                     # Diagrama entidad-relación del sistema
