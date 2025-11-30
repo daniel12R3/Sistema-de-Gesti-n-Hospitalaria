@@ -113,9 +113,8 @@ git clone https://github.com/daniel12R3/Sistema-de-Gesti-n-Hospitalaria.git
 ---
 
 ## 2. Procedimientos Almacenados
-
-### 2.1 Gestión de Citas
 ```sql
+2.1 Gestión de Citas
 CREATE OR REPLACE PROCEDURE sp_insertar_cita(...);
 CREATE OR REPLACE PROCEDURE sp_actualizar_estado(...);
 CREATE OR REPLACE PROCEDURE sp_reprogramar_cita(...);
@@ -202,6 +201,7 @@ FROM PACIENTE p
 LEFT JOIN CITA c ON p.idpaciente = c.idpaciente
 LEFT JOIN PAGOPACIENTE pp ON c.idcita = pp.idcita
 GROUP BY p.idpaciente, p.nombre, p.apellido;
+```
 
 5. Funcionalidades Avanzadas en la Aplicación (Java)
 5.1 Invocación de Procedimientos
