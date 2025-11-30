@@ -55,30 +55,28 @@ El sistema permite:
 └─ README - Entregable 3.md          # README correspondiente al Entregable 3 (este archivo)
 
 
-⚠️ No se incluyen out/ ni .idea/ ya que son específicos del entorno local.
 
-🔧 Requisitos
+⚠️ No se incluyen `out/` ni `.idea/` ya que son específicos del entorno local.
 
-Java JDK 8 o superior
+---
 
-Oracle Database 11g XE
+## 🔧 Requisitos
 
-Driver JDBC: ojdbc8.jar
+- Java JDK 8 o superior  
+- Oracle Database 11g XE  
+- Driver JDBC: ojdbc8.jar  
+- IDE recomendado: IntelliJ IDEA  
 
-IDE recomendado: IntelliJ IDEA
+---
 
-⚙️ Configuración y Ejecución
+## ⚙️ Configuración y Ejecución
 
-Clonar el repositorio:
-
+1. Clonar el repositorio:  
 git clone https://github.com/daniel12R3/Sistema-de-Gesti-n-Hospitalaria.git
 
-
-Abrir el proyecto en IntelliJ IDEA.
-
-Configurar la conexión a la base de datos en: config/ConexionOracle.java con tus credenciales.
-
-Ejecutar la aplicación desde: app/Main.java
+2. Abrir el proyecto en IntelliJ IDEA.
+3. Configurar la conexión a la base de datos en: config/ConexionOracle.java con tus credenciales.
+4. Ejecutar la aplicación desde: app/Main.java
 
 🏗️ Arquitectura del Sistema (MVC Simplificado)
 
