@@ -111,49 +111,70 @@ Interfaz de usuario por consola.
 Menús para registrar, listar, actualizar y eliminar médicos/pacientes, gestionar citas/pagos y generar reportes.
 
 📝 Funcionalidades Principales
-👤 Gestión de Pacientes
-🩺 Gestión de Médicos
-🏷️ Gestión de Especialidades
-📅 Gestión de Citas
-💰 Registro de Pagos de Pacientes y Médicos
-📊 Consultas y reportes básicos
+    - 👤 Gestión de Pacientes
+    - 🩺 Gestión de Médicos
+    - 🏷️ Gestión de Especialidades
+    - 📅 Gestión de Citas
+    - 💰 Registro de Pagos de Pacientes y Médicos
+    - 📊 Consultas y reportes básicos
+    
 2. Procedimientos Almacenados
-
-Procedimientos completos para todas las entidades:
-
--- Citas
+2.1 Gestión de Citas
 CREATE OR REPLACE PROCEDURE sp_insertar_cita(...);
 CREATE OR REPLACE PROCEDURE sp_actualizar_estado(...);
 CREATE OR REPLACE PROCEDURE sp_reprogramar_cita(...);
 CREATE OR REPLACE PROCEDURE sp_eliminar_cita(...);
 
--- Pacientes
+2.2 Gestión de Pacientes
 CREATE OR REPLACE PROCEDURE sp_insertar_paciente(...);
 CREATE OR REPLACE PROCEDURE sp_actualizar_paciente(...);
 CREATE OR REPLACE PROCEDURE sp_eliminar_paciente(...);
+CREATE OR REPLACE PROCEDURE sp_buscar_paciente(...);
 
--- Médicos
+2.3 Gestión de Médicos
 CREATE OR REPLACE PROCEDURE sp_insertar_medico(...);
 CREATE OR REPLACE PROCEDURE sp_actualizar_medico(...);
 CREATE OR REPLACE PROCEDURE sp_eliminar_medico(...);
 
--- Especialidades
+2.4 Gestión de Especialidades
 CREATE OR REPLACE PROCEDURE sp_insertar_especialidad(...);
 CREATE OR REPLACE PROCEDURE sp_actualizar_especialidad(...);
 CREATE OR REPLACE PROCEDURE sp_eliminar_especialidad(...);
 
--- Pagos
-CREATE OR REPLACE PROCEDURE sp_insertar_pago_paciente(...);
+2.5 Gestión de Pagos
+CREATE OR REPLACE PROCEDURE SP_INSERTAR_PAGO_PACIENTE(...);
 CREATE OR REPLACE PROCEDURE sp_insertar_pagomedico(...);
 
 3. Triggers
+-- Estado por defecto de citas
+CREATE OR REPLACE TRIGGER trg_default_estado
+BEFORE INSERT ON CITA
+FOR EACH ROW
+BEGIN
+    IF :NEW.estado IS NULL THEN
+        :NEW.estado := 'PENDIENTE';
+    END IF;
+END;
+/
 
-Valores por defecto (estado = 'PENDIENTE')
+-- Validación CMP único
+CREATE OR REPLACE TRIGGER trg_cmp_unico
+BEFORE INSERT OR UPDATE ON medico
+FOR EACH ROW
+DECLARE
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM medico
+    WHERE cmp = :NEW.cmp
+      AND idmedico != NVL(:OLD.idmedico, -1);
+    IF v_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20010, 'CMP duplicado');
+    END IF;
+END;
+/
 
-Validación de unicidad (DNI y CMP) usando restricciones UNIQUE
-
-Log de auditoría de cambios:
-
+-- Log de cambios de estado de citas
 CREATE OR REPLACE TRIGGER trg_log_update_cita
 AFTER UPDATE OF estado ON CITA
 FOR EACH ROW
@@ -164,10 +185,12 @@ END;
 /
 
 4. Vistas
--- Detalle de citas
 CREATE OR REPLACE VIEW vw_citas_detalle AS
-SELECT c.idcita, TO_CHAR(c.fecha, 'YYYY-MM-DD') AS fecha_txt,
-       c.horainicio, c.horafin, c.estado,
+SELECT c.idcita,
+       TO_CHAR(c.fecha, 'YYYY-MM-DD') AS fecha_txt,
+       c.horainicio,
+       c.horafin,
+       c.estado,
        p.nombre || ' ' || p.apellido AS paciente,
        m.nombre || ' ' || m.apellido AS medico
 FROM CITA c
@@ -175,7 +198,6 @@ JOIN PACIENTE p ON c.idpaciente = p.idpaciente
 JOIN MEDICO m ON c.idmedico = m.idmedico
 ORDER BY c.fecha DESC, c.horainicio;
 
--- Resumen de pagos por paciente
 CREATE OR REPLACE VIEW vw_resumen_pagos_paciente AS
 SELECT p.idpaciente,
        p.nombre || ' ' || p.apellido AS paciente,
@@ -185,7 +207,7 @@ LEFT JOIN CITA c ON p.idpaciente = c.idpaciente
 LEFT JOIN PAGOPACIENTE pp ON c.idcita = pp.idcita
 GROUP BY p.idpaciente, p.nombre, p.apellido;
 
-5. Funcionalidades Avanzadas en Java
+5. Funcionalidades Avanzadas en la Aplicación (Java)
 5.1 Invocación de Procedimientos
 CallableStatement cstmt = conn.prepareCall("{call sp_insertar_cita(?, ?, ?, ?, ?, ?)}");
 cstmt.setDate(1, java.sql.Date.valueOf(fecha));
@@ -205,13 +227,10 @@ while(rs.next()){
 
 5.3 Validaciones en el Servicio
 
-Evitar duplicidad de DNI o CMP
-
-Validar pagos mayores a 0
-
-Controlar pagos duplicados por cita y fecha
-
-Validar fecha y hora de citas
+  - Evitar duplicidad de DNI o CMP
+  - Validar pagos mayores a 0
+  - Controlar pagos duplicados por cita y fecha
+  - Validar fecha y hora de citas
 
 6. Documentación y GitHub
 
@@ -221,11 +240,7 @@ https://github.com/daniel12R3/Sistema-de-Gesti-n-Hospitalaria.git
 Incluye ejemplos de ejecución, capturas de resultados y pruebas de funcionalidad.
 
 7. Conclusiones
-
-Automatización completa de la gestión hospitalaria mediante procedimientos, triggers y vistas.
-
-Integración con Java para invocación de procedimientos y visualización de vistas.
-
-Garantía de integridad de datos mediante validaciones y restricciones.
-
-Proyecto listo para ejecución, despliegue y futuras mejoras.
+  - Automatización completa de la gestión hospitalaria mediante procedimientos, triggers y vistas.
+  - Integración con Java para invocación de procedimientos y visualización de vistas.
+  - Garantía de integridad de datos mediante validaciones y restricciones.
+  - Proyecto listo para ejecución, despliegue y futuras mejoras.
