@@ -78,48 +78,44 @@ git clone https://github.com/daniel12R3/Sistema-de-Gesti-n-Hospitalaria.git
 3. Configurar la conexión a la base de datos en: config/ConexionOracle.java con tus credenciales.
 4. Ejecutar la aplicación desde: app/Main.java
 
-🏗️ Arquitectura del Sistema (MVC Simplificado)
+## 🏗️ Arquitectura del Sistema (MVC Simplificado)
 
-Modelo (model/)
+**Modelo (`model/`)**  
+- Entidades: `Paciente`, `Medico`, `Especialidad`, `Cita`, `PagoPaciente`, `PagoMedico`.  
+- Métodos `getters/setters`.  
 
-Entidades: Paciente, Medico, Especialidad, Cita, PagoPaciente, PagoMedico.
+**DAO (`dao/`)**  
+- Inserción, búsqueda, listado y eliminación de registros.  
+- Uso de `PreparedStatement` para seguridad y manejo de tipos `DATE/TIMESTAMP`.  
 
-Métodos getters/setters.
+**Service (`service/`)**  
+- Validaciones y reglas de negocio:  
+  - Campos obligatorios  
+  - Existencia de pacientes y médicos  
+  - Control de solapamiento de horarios de citas  
+  - Manejo de pagos y acumulados  
 
-DAO (dao/)
+**Main (`app/`)**  
+- Interfaz de usuario por consola.  
+- Menús para registrar, listar, actualizar y eliminar médicos/pacientes, gestionar citas/pagos y generar reportes.  
 
-Inserción, búsqueda, listado y eliminación de registros.
+---
 
-Uso de PreparedStatement para seguridad y manejo de tipos DATE/TIMESTAMP.
+## 📝 Funcionalidades Principales
 
-Service (service/)
+### 👤 Gestión de Pacientes  
+### 🩺 Gestión de Médicos  
+### 🏷️ Gestión de Especialidades  
+### 📅 Gestión de Citas  
+### 💰 Registro de Pagos de Pacientes y Médicos  
+### 📊 Consultas y reportes básicos  
 
-Validaciones y reglas de negocio:
+---
 
-Campos obligatorios
+## 2. Procedimientos Almacenados
 
-Existencia de pacientes y médicos
-
-Control de solapamiento de horarios de citas
-
-Manejo de pagos y acumulados
-
-Main (app/)
-
-Interfaz de usuario por consola.
-
-Menús para registrar, listar, actualizar y eliminar médicos/pacientes, gestionar citas/pagos y generar reportes.
-
-📝 Funcionalidades Principales
-    - 👤 Gestión de Pacientes
-    - 🩺 Gestión de Médicos
-    - 🏷️ Gestión de Especialidades
-    - 📅 Gestión de Citas
-    - 💰 Registro de Pagos de Pacientes y Médicos
-    - 📊 Consultas y reportes básicos
-    
-2. Procedimientos Almacenados
-2.1 Gestión de Citas
+### 2.1 Gestión de Citas
+```sql
 CREATE OR REPLACE PROCEDURE sp_insertar_cita(...);
 CREATE OR REPLACE PROCEDURE sp_actualizar_estado(...);
 CREATE OR REPLACE PROCEDURE sp_reprogramar_cita(...);
